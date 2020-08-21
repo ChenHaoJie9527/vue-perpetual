@@ -10,7 +10,7 @@ const tiems = {
         return getSubTimes.getYear(date);
     }
 }
-// 处理时间函数
+// 时间函数具体业务逻辑
 class getSubTimes {
     static getDay(date) {
         const value = date.getDate().toString();

@@ -23,6 +23,6 @@ export default async (field, date) => {
     if (!floorWrited[field]) {
         return;
     }
-    data = floorWrited[field](date);
+    data = await floorWrited[field](date);
     return data;
 }

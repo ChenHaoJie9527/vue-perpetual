@@ -2,7 +2,8 @@ import {
     getDate
 } from "@/libs/utils";
 
-export default [{
+export default [
+    {
         icontext: getDate("day"),
         tabText: "当天",
         path: "/"
