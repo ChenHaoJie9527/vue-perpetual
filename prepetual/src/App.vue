@@ -37,10 +37,7 @@ export default {
       }
     );
     const data = computed(() => state).value;
-    console.log(data);
-    return {
-      ...data,
-    };
+    return computed(() => state).value;
   },
 };
 </script>

@@ -41,13 +41,13 @@ function Unlength(state, types) {
 // 调用时间类
 const changePlaceHolder = {
     day(state) {
-        return state.placeholder = `${newDate.setDay()}(${install.Inday()})`;
+        return state.placeholder = `${newDate.setDay()} (${install.Inday()})`;
     },
     month(state) {
-        return state.placeholder = `${newDate.setMonth()}(${install.Inmonth()})`;
+        return state.placeholder = `${newDate.setMonth()} (${install.Inmonth()})`;
     },
     year(state) {
-        return state.placeholder = `${newDate.setYear()}(${install.Inyear()})`;
+        return state.placeholder = `${newDate.setYear()} (${install.Inyear()})`;
     },
 }
 
@@ -58,24 +58,24 @@ class newDate {
         let year = newDate.year();
         let month = newDate.month();
         let day = newDate.day();
-        return `格式 ${year}${month}${day}`;
+        return `格式: ${year}${month}${day}`;
     }
     static setMonth() {
-        return `格式 ${newDate.year()}${newDate.month()}`;
+        return `格式: ${newDate.year()}${newDate.month()}`;
     }
     static setYear() {
-        return `格式 ${newDate.year()}`;
+        return `格式: ${newDate.year()}`;
     }
     static year() {
         return newDate.date.getFullYear();
     }
     static month() {
-        let month = newDate.date.getMonth();
+        let month = newDate.date.getMonth() + 1;
         month = month < 10 ? ("0" + month) : month;
         return month;
     }
     static day() {
-        let day = newDate.date.getDay();
+        let day = newDate.date.getDate();
         day = day < 10 ? ("0" + day) : day;
         return day;
     }
@@ -101,7 +101,7 @@ const install = new Install();
 // 当匹配到空是进行处理
 function UnHouder(state, types) {
     if (types == undefined) {
-        return state.placeholder = newDate.setDay();
+        return state.placeholder = `${newDate.setDay()} (${install.Inday()})`;
     }
     return;
 }
@@ -124,5 +124,8 @@ export default {
             return UnHouder(state, changePlaceHolder[routerName]);
         }
         return changePlaceHolder[routerName](state);
+    },
+    setErrorCode(state, errorCode) {
+        state.errorCode = errorCode;
     }
 }

@@ -5,6 +5,8 @@ import {
     getYearData
 } from "./request";
 
+import { FormatCharDate, MapForcharDate } from "../libs/utils";
+
 const floorWrited = {
     async day(date) {
         return await getDayData(date);
@@ -17,12 +19,29 @@ const floorWrited = {
     }
 }
 
-export default async (field, date) => {
+
+export default async (store, field, date) => {
     let data = null;
     // 对象映射
     if (!floorWrited[field]) {
         return;
     }
     data = await floorWrited[field](date);
-    return data;
+
+    if (data.error_code !== 0) {
+        store.commit("setErrorCode", data.error_code);
+        return;
+    }
+
+    let res = null;
+    switch (field) {
+        case "day":
+            res = data.reslut.data;
+            res.date = FormatCharDate(res.date, "day");
+            res["year-month"] = FormatCharDate(res["year-month"], "month")
+        default:
+            break;
+    }
+
+    // return data;
 }
