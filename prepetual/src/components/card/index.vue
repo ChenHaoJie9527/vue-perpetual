@@ -1,21 +1,21 @@
 <template>
   <div class="card-wrapper">
-    <!-- <div class="card">
+    <div class="card">
       <div class="header">
         <span class="weekday">{{ data.weekday }}</span>
       </div>
       <h1 class="text lunar">{{ data.lunar }}</h1>
       <h2 class="text date">{{ data.date }}</h2>
     </div>
-  </div> -->
+  </div>
 </template>
 
 <script>
 export default {
   name: "DayCard",
   props: {
-      data: Object
-  }
+    data: Object,
+  },
 };
 </script>
 

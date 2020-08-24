@@ -5,11 +5,14 @@
 <script>
 import getData from "@/services";
 import { onMounted } from "vue";
+import { useStore } from "vuex";
 export default {
   name: "Month",
   setup() {
+    const store = useStore(),
+      state = store.state;
     onMounted(() => {
-      getData("month", "2020-9");
+      getData(store, "month", "2020-9");
     });
   },
 };

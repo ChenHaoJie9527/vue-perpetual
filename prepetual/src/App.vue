@@ -24,7 +24,7 @@ export default {
     const store = useStore(),
       state = store.state,
       router = useRouter();
-    router.push("/");
+    // router.push("/");
     // 监听路由
     watch(
       () => {
@@ -36,7 +36,6 @@ export default {
         store.commit("setPlaceholder", val);
       }
     );
-    const data = computed(() => state).value;
     return computed(() => state).value;
   },
 };
