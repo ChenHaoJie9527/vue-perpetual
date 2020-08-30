@@ -36,7 +36,7 @@ export default async (store, field, date) => {
     let res = null;
     switch (field) {
         case "day":
-            res = data.reslut.data;
+            res = data.result.data;
             res.date = FormatCharDate(res.date, "day");
             res["year-month"] = FormatCharDate(res["year-month"], "month")
         default:
