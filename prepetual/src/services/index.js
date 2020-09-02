@@ -5,7 +5,10 @@ import {
     getYearData
 } from "./request";
 
-import { FormatCharDate, MapForcharDate } from "../libs/utils";
+import {
+    FormatCharDate,
+    MapForcharDate
+} from "../libs/utils";
 
 const floorWrited = {
     async day(date) {
@@ -22,7 +25,6 @@ const floorWrited = {
 
 export default async (store, field, date) => {
     let data = null;
-    // 对象映射
     if (!floorWrited[field]) {
         return;
     }
@@ -32,16 +34,26 @@ export default async (store, field, date) => {
         store.commit("setErrorCode", data.error_code);
         return;
     }
-
     let res = null;
     switch (field) {
         case "day":
             res = data.result.data;
             res.date = FormatCharDate(res.date, "day");
-            res["year-month"] = FormatCharDate(res["year-month"], "month")
+            res["year-month"] = FormatCharDate(res["year-month"], "month");
+            break;
+        case "month":
+            res = data.result.data.holiday_array;
+            res = MapForcharDate(res, "festival");
+            break;
+        case "year":
+            res = data.result.data.holiday_list;
+            res = MapForcharDate(res, "startday");
+            break;
         default:
             break;
     }
-
-    // return data;
+    store.commit("setData", {
+        field,
+        data: res
+    })
 }

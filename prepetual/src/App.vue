@@ -2,7 +2,12 @@
   <div id="app">
     <myHeader>{{headerTitle}}</myHeader>
     <searchInput :placeholder="placeholder" :maxlength="maxlength"></searchInput>
-    <router-view />
+    <!-- 缓存组件数据 -->
+    <router-view v-slot="{Component}">
+      <keep-alive>
+        <component :is="Component"></component>
+      </keep-alive>
+    </router-view>
     <myTab></myTab>
   </div>
 </template>
@@ -24,7 +29,7 @@ export default {
     const store = useStore(),
       state = store.state,
       router = useRouter();
-    router.push("/");
+    // router.push("/");
     // 监听路由
     watch(
       () => {
@@ -36,7 +41,6 @@ export default {
         store.commit("setPlaceholder", val);
       }
     );
-    const data = computed(() => state).value;
     return computed(() => state).value;
   },
 };
